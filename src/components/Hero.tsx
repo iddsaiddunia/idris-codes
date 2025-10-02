@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { ArrowDown } from "lucide-react";
+import developerVector from "@/assets/developer-vector.png";
 
 const Hero = () => {
   const scrollToSection = (id: string) => {
@@ -29,51 +30,67 @@ const Hero = () => {
 
       {/* Content */}
       <div className="container mx-auto px-4 z-10">
-        <div className="text-center space-y-6 animate-slide-up">
-          <div className="inline-block">
-            <span className="text-primary text-sm font-semibold tracking-wider uppercase bg-primary/10 px-4 py-2 rounded-full">
-              Full Stack Developer
-            </span>
-          </div>
-          
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight">
-            Hi, I'm{" "}
-            <span className="bg-gradient-primary bg-clip-text text-transparent">
-              Idd D Said
-            </span>
-          </h1>
-          
-          <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-            Crafting exceptional digital experiences with React, Django, Flutter, and Machine Learning
-          </p>
+        <div className="grid lg:grid-cols-2 gap-12 items-center">
+          {/* Left side - Text content */}
+          <div className="space-y-6 animate-slide-up text-center lg:text-left">
+            <div className="inline-block">
+              <span className="text-primary text-sm font-semibold tracking-wider uppercase bg-primary/10 px-4 py-2 rounded-full">
+                Full Stack Developer
+              </span>
+            </div>
+            
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight">
+              Hi, I'm{" "}
+              <span className="bg-gradient-primary bg-clip-text text-transparent">
+                Idd D Said
+              </span>
+            </h1>
+            
+            <p className="text-xl md:text-2xl text-muted-foreground leading-relaxed">
+              Crafting exceptional digital experiences with React, Django, Flutter, and Machine Learning
+            </p>
 
-          <div className="flex gap-4 justify-center pt-6">
-            <Button 
-              size="lg" 
-              className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-8 py-6 text-lg rounded-full transition-all hover:scale-105"
-              onClick={() => scrollToSection("projects")}
-            >
-              View Projects
-            </Button>
-            <Button 
-              size="lg" 
-              variant="outline"
-              className="border-primary/50 text-foreground hover:bg-primary/10 font-semibold px-8 py-6 text-lg rounded-full transition-all hover:scale-105"
-              onClick={() => scrollToSection("contact")}
-            >
-              Get in Touch
-            </Button>
+            <div className="flex gap-4 justify-center lg:justify-start pt-6">
+              <Button 
+                size="lg" 
+                className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-8 py-6 text-lg rounded-full transition-all hover:scale-105"
+                onClick={() => scrollToSection("projects")}
+              >
+                View Projects
+              </Button>
+              <Button 
+                size="lg" 
+                variant="outline"
+                className="border-primary/50 text-foreground hover:bg-primary/10 font-semibold px-8 py-6 text-lg rounded-full transition-all hover:scale-105"
+                onClick={() => scrollToSection("contact")}
+              >
+                Get in Touch
+              </Button>
+            </div>
           </div>
 
-          <div className="pt-12 animate-bounce">
-            <button 
-              onClick={() => scrollToSection("about")}
-              className="text-primary hover:text-primary/80 transition-colors"
-              aria-label="Scroll to about section"
-            >
-              <ArrowDown className="w-8 h-8" />
-            </button>
+          {/* Right side - Developer Vector */}
+          <div className="relative animate-float hidden lg:block">
+            <div className="relative z-10">
+              <img 
+                src={developerVector} 
+                alt="Developer illustration" 
+                className="w-full h-auto max-w-lg mx-auto drop-shadow-2xl"
+              />
+            </div>
+            {/* Glow effect behind the image */}
+            <div className="absolute inset-0 bg-gradient-primary opacity-20 blur-3xl animate-glow" />
           </div>
+        </div>
+
+        <div className="pt-12 animate-bounce text-center">
+          <button 
+            onClick={() => scrollToSection("about")}
+            className="text-primary hover:text-primary/80 transition-colors"
+            aria-label="Scroll to about section"
+          >
+            <ArrowDown className="w-8 h-8" />
+          </button>
         </div>
       </div>
     </section>
