@@ -7,6 +7,7 @@ const Skills = () => {
     { name: "Machine Learning", level: 80, color: "secondary" },
     { name: "TypeScript", level: 90, color: "primary" },
     { name: "Python", level: 92, color: "secondary" },
+    { name: "Payment Integration", level: 85, color: "accent" },
     { name: "Git & CI/CD", level: 87, color: "accent" },
   ];
 
