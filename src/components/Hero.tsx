@@ -1,11 +1,25 @@
 import { Button } from "@/components/ui/button";
 import { ArrowDown } from "lucide-react";
+import { useState } from "react";
 import developerVector from "@/assets/developer-vector.png";
 import grassDewBg from "@/assets/grass-dew-background.jpg";
 
 const Hero = () => {
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+
   const scrollToSection = (id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = (e.clientX - rect.left - rect.width / 2) / 20;
+    const y = (e.clientY - rect.top - rect.height / 2) / 20;
+    setMousePosition({ x, y });
+  };
+
+  const handleMouseLeave = () => {
+    setMousePosition({ x: 0, y: 0 });
   };
 
   return (
@@ -81,8 +95,17 @@ const Hero = () => {
           </div>
 
           {/* Right side - Developer Vector */}
-          <div className="relative animate-float hidden lg:block">
-            <div className="relative z-10">
+          <div 
+            className="relative animate-float hidden lg:block"
+            onMouseMove={handleMouseMove}
+            onMouseLeave={handleMouseLeave}
+          >
+            <div 
+              className="relative z-10 transition-transform duration-300 ease-out"
+              style={{ 
+                transform: `translate(${mousePosition.x}px, ${mousePosition.y}px)` 
+              }}
+            >
               <img 
                 src={developerVector} 
                 alt="Developer illustration" 
