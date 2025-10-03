@@ -1,10 +1,13 @@
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import { Button } from "./ui/button";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -14,10 +17,23 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const scrollToSection = (id: string) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
+  const handleNavigation = (id: string) => {
+    if (location.pathname === "/") {
+      // On home page, scroll to section
+      const element = document.getElementById(id);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+        setIsMobileMenuOpen(false);
+      }
+    } else {
+      // On other pages, navigate to home and scroll
+      navigate("/");
+      setTimeout(() => {
+        const element = document.getElementById(id);
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth" });
+        }
+      }, 100);
       setIsMobileMenuOpen(false);
     }
   };
@@ -42,7 +58,7 @@ const Navbar = () => {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <button
-            onClick={() => scrollToSection("home")}
+            onClick={() => handleNavigation("home")}
             className="flex items-center space-x-2 group"
           >
             <div className="w-10 h-10 rounded-lg bg-gradient-primary flex items-center justify-center font-bold text-lg text-primary-foreground transition-transform group-hover:scale-110">
@@ -57,7 +73,7 @@ const Navbar = () => {
               <Button
                 key={item.id}
                 variant="ghost"
-                onClick={() => scrollToSection(item.id)}
+                onClick={() => handleNavigation(item.id)}
                 className="text-foreground/80 hover:text-foreground hover:bg-primary/10"
               >
                 {item.name}
@@ -83,7 +99,7 @@ const Navbar = () => {
               <Button
                 key={item.id}
                 variant="ghost"
-                onClick={() => scrollToSection(item.id)}
+                onClick={() => handleNavigation(item.id)}
                 className="w-full text-left justify-start text-foreground/80 hover:text-foreground hover:bg-primary/10"
               >
                 {item.name}
