@@ -1,10 +1,8 @@
 import { ExternalLink, Github } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const Projects = () => {
-  const [showAll, setShowAll] = useState(false);
-  
   const projects = [
     {
       title: "E-Commerce Platform",
@@ -29,34 +27,8 @@ const Projects = () => {
       description: "Scalable messaging platform with WebSocket support, group chats, and media sharing capabilities",
       tech: ["React", "Node.js", "Socket.io", "MongoDB"],
       gradient: "from-primary to-accent"
-    },
-    {
-      title: "Task Management System",
-      description: "Collaborative project management tool with kanban boards, team collaboration, and progress tracking",
-      tech: ["React", "Redux", "Node.js", "MySQL"],
-      gradient: "from-secondary to-primary"
-    },
-    {
-      title: "Weather Forecast Dashboard",
-      description: "Real-time weather application with interactive maps, detailed forecasts, and location-based alerts",
-      tech: ["React", "OpenWeather API", "Leaflet", "Chart.js"],
-      gradient: "from-accent to-secondary"
-    },
-    {
-      title: "Portfolio CMS",
-      description: "Custom content management system for creative professionals with drag-and-drop interface",
-      tech: ["React", "Strapi", "GraphQL", "PostgreSQL"],
-      gradient: "from-primary to-secondary"
-    },
-    {
-      title: "Recipe Sharing Platform",
-      description: "Community-driven cooking app with recipe search, meal planning, and nutritional information",
-      tech: ["React Native", "Firebase", "Algolia", "Stripe"],
-      gradient: "from-secondary to-accent"
     }
   ];
-
-  const displayedProjects = showAll ? projects : projects.slice(0, 4);
 
   return (
     <section id="projects" className="py-24 relative">
@@ -72,7 +44,7 @@ const Projects = () => {
           </div>
 
           <div className="grid md:grid-cols-2 gap-8">
-            {displayedProjects.map((project, index) => (
+            {projects.map((project, index) => (
               <div
                 key={index}
                 className="group relative rounded-2xl bg-card/50 backdrop-blur-sm border border-border overflow-hidden hover:border-primary/50 transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl hover:shadow-primary/20"
@@ -124,18 +96,18 @@ const Projects = () => {
             ))}
           </div>
 
-          {projects.length > 4 && (
-            <div className="flex justify-center mt-12">
-              <Button
-                onClick={() => setShowAll(!showAll)}
-                size="lg"
-                variant="outline"
-                className="border-primary/50 hover:bg-primary/10"
-              >
-                {showAll ? "Show Less" : `View More Projects (${projects.length - 4} more)`}
-              </Button>
-            </div>
-          )}
+          <div className="flex justify-center mt-12">
+            <Button
+              asChild
+              size="lg"
+              variant="outline"
+              className="border-primary/50 hover:bg-primary/10"
+            >
+              <Link to="/projects">
+                View All Projects
+              </Link>
+            </Button>
+          </div>
         </div>
       </div>
     </section>
